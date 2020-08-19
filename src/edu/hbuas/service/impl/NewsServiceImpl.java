@@ -36,5 +36,10 @@ public class NewsServiceImpl implements NewsService {
 		// TODO Auto-generated method stub
 		return nd.updatenews(news)>0;
 	}
+	@Override
+	public List<News> getNewsByPage(int pageIndex, int pageSize) {
+		// TODO Auto-generated method stub
+		return nd.getNewsByPage(pageIndex, pageSize);
+	}
 
 }

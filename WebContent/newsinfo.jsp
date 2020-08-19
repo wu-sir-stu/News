@@ -1,3 +1,9 @@
+<%@page import="edu.hbuas.entity.Topic"%>
+<%@page import="edu.hbuas.entity.News"%>
+<%@page import="edu.hbuas.service.impl.TopicServiceImpl"%>
+<%@page import="edu.hbuas.service.TopicService"%>
+<%@page import="edu.hbuas.service.impl.NewsServiceImpl"%>
+<%@page import="edu.hbuas.service.NewsService"%>
 <%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -25,6 +31,29 @@
 <div id="container">
 新闻详情 
   <!-- 新闻详情 -->
+  <%
+  request.setCharacterEncoding("utf-8");
+  int nid=Integer.parseInt(request.getParameter("nid"));
+  NewsService ns=new NewsServiceImpl();
+  TopicService ts=new TopicServiceImpl();
+  List<Topic> alltopic=ts.getalltopic();
+  News news=ns.getnewsbynid(nid);
+  String tname="";
+  for(int i=0;i<alltopic.size();i++){
+		Topic topic=alltopic.get(i);
+		if(news.getNtid()==topic.getTid()){
+			tname=topic.getTname();
+			break;
+		}
+	}
+  %>
+
+  <h3 align="center"><%=news.getNtitle() %></h3>
+ 
+  <h6 align="center">作者：<%=news.getNauthor() %>&nbsp;发布时间：<%=news.getNcreateDate() %></h6>
+<div>
+<%=news.getNcontent() %>
+</div>
 </div>
 <div id="friend">
   <h1 class="friend_t"> <img src="Images/friend_ico.gif" alt="合作伙伴" /> </h1>

@@ -1,3 +1,4 @@
+<%@page import="edu.hbuas.dbutil.PageUtil"%>
 <%@page import="edu.hbuas.entity.Topic"%>
 <%@page import="edu.hbuas.entity.News"%>
 <%@page import="java.util.List"%>
@@ -38,9 +39,13 @@ text-overflow: ellipsis;
 		<td>操作</td>
 		</tr>
 		<%
-		List<News> allnews=(List<News>)session.getAttribute("allnews");
+		//当前页
+		int pageIndex=(int)session.getAttribute("pageIndex");
+		//总页数
+		int totalPages=(int)session.getAttribute("totalPages");
+		List<News> pagenews=(List<News>)session.getAttribute("pagenews");
 		List<Topic> alltopic=(List<Topic>)session.getAttribute("alltopic");
-		for(News n:allnews){
+		for(News n:pagenews){
 			//根据tid获取tname
 			String tname="";
 			for(int i=0;i<alltopic.size();i++){
@@ -65,6 +70,31 @@ text-overflow: ellipsis;
 			<%
 		}
 		%>
+		<tr>
+			<!-- 分页链接 -->
+			<td colspan="7" align="right">
+			
+			<a href="GetAllNews?pageIndex=1">首页</a>
+			<a href="GetAllNews?pageIndex=<%=pageIndex+1%>">下一页</a>
+			<a href="GetAllNews?pageIndex=<%=pageIndex-1%>">上一页</a>
+			<a href="GetAllNews?pageIndex=<%=totalPages%>">尾页</a>
+			<a>当前页:<%=pageIndex %>/<%=totalPages%></a>
+			跳转到:<input type="text" id="pageIndex" size="10"/>页
+			<input type="button" value="GO" onclick="go()"/>
+			<script type="text/javascript">
+			function go() {
+				var pageIndex=document.getElementById("pageIndex").value;
+				
+				if(pageIndex==""){
+					alert("页码不能为空！");
+					pageIndex="-1";
+				}
+				location.href="GetAllNews?pageIndex="+pageIndex;
+			}
+			</script>
+			</td>
+			
+		</tr>
 	</table>	
 </body>
 </html>

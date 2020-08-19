@@ -12,4 +12,6 @@ public interface NewsDao {
 	int deletenewbynid(int nid);//根据nid删除news
 	News getnewsbynid(int nid);//根据nid获取news
 	int updatenews(News news);//根据nid修改news
+	List<News> getNewsByPage(int pageIndex,int pageSize);//当前页码pageInex，每页显示的条数
+	
 }

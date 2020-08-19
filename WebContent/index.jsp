@@ -1,3 +1,11 @@
+<%@page import="edu.hbuas.dao.impl.NewsDaoImpl"%>
+<%@page import="edu.hbuas.dao.NewsDao"%>
+<%@page import="edu.hbuas.entity.News"%>
+<%@page import="edu.hbuas.service.impl.NewsServiceImpl"%>
+<%@page import="edu.hbuas.service.NewsService"%>
+<%@page import="edu.hbuas.entity.Topic"%>
+<%@page import="edu.hbuas.service.impl.TopicServiceImpl"%>
+<%@page import="edu.hbuas.service.TopicService"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -28,18 +36,43 @@
     <div class="side_list">
       <ul>
       <!-- 国内新闻 -->
+      <%
+      NewsDao nd=new NewsDaoImpl();
+      List<News> getnews1=nd.getnewsbyntid(16);
+      for(News n:getnews1){
+    	  %>
+    	 <li><a href="newsinfo.jsp?nid=<%=n.getNid()%>"><%=n.getNtitle() %></a><span><%=n.getNcreateDate() %></span></li>
+    	  <%
+      }
+      %>
       </ul>
     </div>
     <h1> <img src="Images/title_2.gif" alt="国际新闻" /> </h1>
     <div class="side_list">
       <ul>
        <!-- 国际新闻 -->
+       <%
+       List<News> getnews2=nd.getnewsbyntid(17);
+       for(News n:getnews2){
+     	  %>
+     	 <li><a href="newsinfo.jsp?nid=<%=n.getNid()%>"><%=n.getNtitle() %></a><span><%=n.getNcreateDate() %></span></li>
+     	  <%
+       }
+       %>
       </ul>
     </div>
     <h1> <img src="Images/title_3.gif" alt="娱乐新闻" /> </h1>
     <div class="side_list">
       <ul>
         <!-- 娱乐新闻 -->
+        <%
+        List<News> getnews3=nd.getnewsbyntid(18);
+        for(News n:getnews3){
+      	  %>
+      	 <li><a href="newsinfo.jsp?nid=<%=n.getNid()%>"><%=n.getNtitle() %></a><span><%=n.getNcreateDate() %></span></li>
+      	  <%
+        }
+        %>
       </ul>
     </div>
   </div>
@@ -49,10 +82,31 @@
       <ul class="class_date">
         <li id='class_month'>
         	<!-- 新闻主题（类型） -->
+        	<%
+        	//调用业务层
+        	TopicService ts=new TopicServiceImpl();
+        	List<Topic> alltopic=ts.getalltopic();
+        	for(Topic t:alltopic){
+        		%>
+        		<a href="#"><%=t.getTname() %></a>
+        		<%
+        	}
+        	%>
         </li>
       </ul>
       <ul class="classlist">
+      
       <!-- 新闻列表 -->
+      <%
+      NewsService ns=new NewsServiceImpl();
+      List<News> allnews=ns.getallnews();
+      for(News n:allnews){
+    	  %>
+    	  <li><a href="newsinfo.jsp?nid=<%=n.getNid()%>"><%=n.getNtitle() %></a><span><%=n.getNcreateDate() %></span></li>
+    	  <%
+      }
+      %>
+      
       </ul>
     </div>
     <div class="picnews">

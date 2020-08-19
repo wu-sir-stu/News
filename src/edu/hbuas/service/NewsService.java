@@ -10,4 +10,6 @@ public interface NewsService {
 	boolean deletenewsbynid(int nid);
 	News getnewsbynid(int nid);
 	boolean updatenews(News news);
+	List<News> getNewsByPage(int pageIndex,int pageSize);//当前页码pageInex，每页显示的条数
+	
 }

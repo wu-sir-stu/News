@@ -107,4 +107,13 @@ public class NewsDaoImpl implements NewsDao {
 		return r;
 	}
 
+	@Override
+	public List<News> getNewsByPage(int pageIndex, int pageSize) {
+		// TODO Auto-generated method stub
+		int startindex=(pageIndex-1)*pageSize;
+		String sql="select * from news limit ?,?";
+		Object[] params= {startindex,pageSize};
+		return Querynews(sql, params);
+	}
+
 }
