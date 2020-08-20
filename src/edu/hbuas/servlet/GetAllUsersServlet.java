@@ -22,6 +22,7 @@ public class GetAllUsersServlet extends HttpServlet {
         HttpSession session=request.getSession();
         session.setAttribute("allusers",allusers);
         //System.out.println(allusers.get(1).toString());
+        request.setAttribute("allusers", allusers);
         request.getRequestDispatcher("/admin/show_user.jsp").forward(request,response);
 
     }
