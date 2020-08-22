@@ -4,13 +4,14 @@ import java.util.List;
 
 import edu.hbuas.dao.NewsDao;
 import edu.hbuas.dao.impl.NewsDaoImpl;
+import edu.hbuas.dao.impl.NewsDaoImpl2;
 import edu.hbuas.entity.News;
 import edu.hbuas.service.NewsService;
 
 public class NewsServiceImpl implements NewsService {
 
 	//添加数据持久层依赖
-	NewsDao nd=new NewsDaoImpl();
+	NewsDao nd=new NewsDaoImpl2();
 	@Override
 	public List<News> getallnews() {
 		// TODO Auto-generated method stub
